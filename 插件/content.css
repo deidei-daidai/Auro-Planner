@@ -1,0 +1,68 @@
+/* AuroMap Scrape Floating Button Styling */
+.auromap-scrape-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999999;
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+  background: rgba(250, 249, 245, 0.88);
+  border: 1px solid rgba(217, 155, 38, 0.4);
+  box-shadow: 0 8px 32px rgba(192, 92, 70, 0.15), 0 2px 8px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  outline: none;
+}
+
+.auromap-scrape-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  border-color: rgba(192, 92, 70, 0.8);
+  box-shadow: 0 12px 40px rgba(192, 92, 70, 0.25), 0 4px 12px rgba(192, 92, 70, 0.1);
+  background: rgba(250, 249, 245, 0.95);
+}
+
+.auromap-scrape-btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.auromap-scrape-btn svg {
+  width: 24px;
+  height: 24px;
+  stroke: #C05C46;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.4s ease;
+}
+
+.auromap-scrape-btn:hover svg {
+  transform: rotate(15deg) scale(1.1);
+  stroke: #D99B26;
+}
+
+/* Success Indicator Ripple Animation */
+@keyframes auromap-success-ripple {
+  0% {
+    box-shadow: 0 0 0 0 rgba(90, 143, 118, 0.4), 0 8px 32px rgba(192, 92, 70, 0.15);
+  }
+  100% {
+    box-shadow: 0 0 0 20px rgba(90, 143, 118, 0), 0 8px 32px rgba(192, 92, 70, 0.15);
+  }
+}
+
+.auromap-scrape-btn.success {
+  background: rgba(90, 143, 118, 0.9);
+  border-color: rgba(90, 143, 118, 1);
+  animation: auromap-success-ripple 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.auromap-scrape-btn.success svg {
+  stroke: #FAF9F5;
+}

@@ -1,0 +1,55 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:../../../db/auro_planner.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 1. 主表：整体旅行计划 (支持存储多个不同行程)
+model Trip {
+  id          String       @id @default(uuid())
+  name        String       // 行程名称
+  totalDays   Int          // 总天数
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  events      DailyEvent[] // 1对多级联 DailyEvent
+}
+
+// 2. 子表：单日行程景点详情与点位
+model DailyEvent {
+  id          String       @id @default(uuid())
+  tripId      String       // 外键关联 Trip
+  dayIndex    Int          // 目标天数
+  time        String?      // 时间点 (例如 "09:00")
+  title       String       // 目的地/活动名称
+  englishTitle String?     // 目的地/活动官方英文/本地名称
+  description String?      // 活动描述
+  transitMode String       @default("DRIVING") // 至下一地点的交通方式 (DRIVING, WALKING, TRANSIT)
+  latitude    Float        // 纬度 (高精对齐坐标)
+  longitude   Float        // 经度 (高精对齐坐标)
+  isHotel     Boolean      @default(false)     // 是否是当天的住宿酒店
+  
+  trip        Trip         @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  intraPoints IntraPoint[] // 1对多级联最细层：景内微观坐标点位
+
+  @@index([tripId])
+  @@index([tripId, dayIndex])
+}
+
+// 3. 孙表（最细层级）：宏观景点内的微观徒步路线点位 (可选择性规划，无时间线)
+model IntraPoint {
+  id          String     @id @default(uuid())
+  eventId     String     // 外键关联 DailyEvent
+  title       String     // 景内子景点名称 (例如 "斗兽场地下层")
+  englishTitle String?   // 景内子景点官方英文/本地名称
+  description String?    // 景内子景点活动描述
+  latitude    Float      // 景内微观纬度
+  longitude   Float      // 景内微观经度
+  sortOrder   Int        @default(0) // 景内路线先后顺序
+
+  event       DailyEvent @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@index([eventId])
+}

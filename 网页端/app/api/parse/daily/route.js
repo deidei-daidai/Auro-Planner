@@ -1,0 +1,118 @@
+import { NextResponse } from "next/server";
+import { geocodeAddress } from "@/lib/maps";
+
+export async function POST(req) {
+  try {
+    const { text, dayIndex } = await req.json();
+    if (!text || text.trim().length === 0) {
+      return NextResponse.json({ error: "Input text is required" }, { status: 400 });
+    }
+
+    const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY;
+    if (!DEEPSEEK_API_KEY) {
+      return NextResponse.json({ error: "DeepSeek API Key is not configured" }, { status: 500 });
+    }
+
+    // Call DeepSeek to parse the daily plan
+    const systemPrompt = `You are a professional travel planner AI. Parse the unstructured travel text into a structured single-day timeline and event stream.
+You must analyze the text carefully to extract:
+1. The target day number (dayIndex, integer). If not clear, default to 1 or use the provided dayIndex value.
+2. A list of scheduled events/spots in order. For each event:
+   - "time": E.g., "09:00", "15:00", or null if not specified.
+   - "title": Chinese name of the attraction, hotel, restaurant, or activity spot (e.g., "斗兽场", "罗马万豪酒店").
+   - "englishTitle": The official English or local name of the attraction, hotel, restaurant, or activity spot (e.g., "Colosseum" for "斗兽场", "Rome Marriott Grand Hotel" for "罗马万豪酒店").
+   - "description": Highly detailed and attractive description of WHAT to do or play at this location ("玩什么" activities, highlights, and tips).
+   - "isHotel": Boolean. Set to true ONLY if this location is the accommodation/hotel for the night.
+   - "transitMode": The transit mode *to the next spot* (either "DRIVING", "WALKING", or "TRANSIT"). Deduce this from the text context (e.g. "开车去..." -> DRIVING, "步行5分钟..." -> WALKING, "坐公交..." -> TRANSIT). Default to "DRIVING" if not specified. Note: the last event of the day can have a default mode.
+
+⚠️ CRITICAL RULE FOR TRANSPORTATION MOVEMENTS:
+- Do NOT parse pure transportation movements, transfers, flights, or train trips (e.g. "机场快线直达市中心", "搭乘航班飞往奥斯陆", "乘大巴去卑尔根") as standalone attraction events/cards!
+- Instead, represent these movements strictly as the 'transitMode' (e.g., TRANSIT or DRIVING) and write the movement details (e.g. "乘机场快线直达市中心") into the 'description' of the PRECEDING event.
+- Standalone event cards MUST strictly represent physical stay points (attractions, restaurants, hotels, parks, viewpoints) where travelers actually stop and visit.
+
+You must return a valid JSON object matching the schema below. Do not include any markdown format blocks in your response, just return pure JSON.
+
+JSON Schema:
+{
+  "dayIndex": 1,
+  "events": [
+    {
+      "time": "09:00",
+      "title": "斗兽场",
+      "englishTitle": "Colosseum",
+      "description": "游览宏伟的古罗马圆形剧场，参观角斗士通道，拍照机位推荐外墙合影。",
+      "isHotel": false,
+      "transitMode": "WALKING"
+    }
+  ]
+}
+`;
+
+    const response = await fetch("https://api.deepseek.com/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${DEEPSEEK_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: "deepseek-chat",
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: `Day Index context (if known): ${dayIndex || "not provided"}\n\nText to parse:\n${text}` }
+        ],
+        response_format: { type: "json_object" },
+        temperature: 0.1
+      })
+    });
+
+    if (!response.ok) {
+      const errText = await response.text();
+      console.error("[DeepSeek Daily Parse] API error:", errText);
+      return NextResponse.json({ error: "DeepSeek API call failed" }, { status: 500 });
+    }
+
+    const data = await response.json();
+    let parsedData;
+    try {
+      parsedData = JSON.parse(data.choices[0].message.content);
+    } catch (e) {
+      console.error("[DeepSeek Daily Parse] Failed to parse JSON content:", data.choices[0].message.content);
+      return NextResponse.json({ error: "Invalid JSON returned by AI" }, { status: 500 });
+    }
+
+    // Overlay explicit dayIndex if provided and resolved is null/invalid
+    if (dayIndex !== undefined && dayIndex !== null) {
+      parsedData.dayIndex = parseInt(dayIndex);
+    }
+
+    // Geocode each event spot with double fallbacks
+    if (parsedData.events && Array.isArray(parsedData.events)) {
+      for (const event of parsedData.events) {
+        // Try geocoding English Title first if available for high-precision overseas search
+        let coords = null;
+        if (event.englishTitle) {
+          coords = await geocodeAddress(event.englishTitle);
+        }
+        
+        // Fallback to Chinese Title
+        if (!coords && event.title) {
+          coords = await geocodeAddress(event.title);
+        }
+
+        if (coords) {
+          event.latitude = coords.lat;
+          event.longitude = coords.lng;
+        } else {
+          // Defaults if geocoding fails
+          event.latitude = 0;
+          event.longitude = 0;
+        }
+      }
+    }
+
+    return NextResponse.json(parsedData);
+  } catch (error) {
+    console.error("[Daily Route] Error parsing daily plan:", error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}

@@ -1,0 +1,29 @@
+# AuroMap Planner Git Ignore Configuration
+
+# 1. Local Environment Configs (Strictly hide API keys!)
+.env*.local
+网页端/.env.local
+网页端/.env*.local
+
+# 2. SQLite Local Databases (Strictly keep databases local!)
+db/
+*.db
+*.db-journal
+
+# 3. Package Manager Dependencies
+node_modules/
+网页端/node_modules/
+
+# 4. Next.js Build Outputs
+.next/
+网页端/.next/
+网页端/out/
+
+# 5. OS & Log Files
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*

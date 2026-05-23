@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "AuroMap Content Pipe",
+  "version": "1.0.1",
+  "description": "AuroMap Planner 纯粹数据抓取旁路管道，一键抓取 AI 对话回复并同步给本地网页端",
+  "permissions": [
+    "tabs",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "<all_urls>",
+    "*://localhost/*",
+    "*://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>",
+        "http://localhost/*",
+        "http://127.0.0.1/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_end"
+    }
+  ]
+}
