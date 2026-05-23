@@ -65,7 +65,7 @@ h1, h2, h3, h4, .brand-header {
   position: absolute;
   top: 24px;
   left: 24px;
-  width: 440px;
+  width: 520px; /* Widened from 500px to 520px for luxury spacious sandledger console */
   height: calc(100vh - 48px);
   background: var(--ivory-white-panel);
   backdrop-filter: blur(24px);
@@ -91,7 +91,7 @@ h1, h2, h3, h4, .brand-header {
 
 .brand {
   font-family: var(--font-outfit);
-  font-size: 22px;
+  font-size: 25px; /* Enlarged from 22px */
   font-weight: 700;
   letter-spacing: 0.15em;
   color: var(--terracotta-red);
@@ -111,7 +111,7 @@ h1, h2, h3, h4, .brand-header {
   padding: 8px 16px;
   border-radius: 12px;
   font-family: var(--font-outfit);
-  font-size: 13px;
+  font-size: 14.5px; /* Enlarged from 13px */
   font-weight: 500;
   color: var(--dark-clay-text);
   outline: none;
@@ -215,12 +215,12 @@ h1, h2, h3, h4, .brand-header {
 
 .scraped-textarea {
   width: 100%;
-  height: 110px;
+  height: 70px; /* Shrunk from 110px to 70px to release critical vertical planning space */
   background: transparent;
   border: none;
   outline: none;
   font-family: var(--font-inter);
-  font-size: 13.5px;
+  font-size: 15px; /* Enlarged from 13.5px */
   line-height: 1.5;
   color: var(--dark-clay-text);
   resize: none;
@@ -244,7 +244,7 @@ h1, h2, h3, h4, .brand-header {
   border-radius: 12px;
   padding: 10px 4px;
   font-family: var(--font-outfit);
-  font-size: 11.5px;
+  font-size: 13px; /* Enlarged from 11.5px */
   font-weight: 600;
   color: var(--dark-clay-text);
   cursor: pointer;
@@ -300,10 +300,15 @@ h1, h2, h3, h4, .brand-header {
 /* Time Bridges */
 .time-bridge {
   position: relative;
-  height: 48px;
+  min-height: 48px;
+  height: auto;
   margin-left: 28px; /* Alignment with marker cards */
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 0 10px 16px;
 }
 
 .time-bridge::before {
@@ -321,16 +326,15 @@ h1, h2, h3, h4, .brand-header {
 }
 
 .time-bridge-badge {
-  position: absolute;
-  left: 12px;
+  position: relative;
   background: rgba(253, 252, 247, 0.9);
   border: 1px solid rgba(217, 155, 38, 0.15);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-radius: 20px;
-  padding: 4px 10px;
-  font-size: 11px;
+  padding: 4px 12px;
+  font-size: 12.5px; /* Enlarged from 11px */
   font-weight: 600;
   color: var(--muted-clay-text);
   display: flex;
@@ -391,13 +395,13 @@ h1, h2, h3, h4, .brand-header {
 
 .poi-title {
   font-family: var(--font-outfit);
-  font-size: 14.5px;
+  font-size: 16.5px; /* Enlarged from 14.5px */
   font-weight: 700;
   color: var(--dark-clay-text);
 }
 
 .poi-time {
-  font-size: 11px;
+  font-size: 12px; /* Enlarged from 11px */
   font-weight: 700;
   background: var(--warm-sand-gray);
   padding: 3px 8px;
@@ -406,7 +410,7 @@ h1, h2, h3, h4, .brand-header {
 }
 
 .poi-desc {
-  font-size: 12.5px;
+  font-size: 14px; /* Enlarged from 12.5px */
   line-height: 1.5;
   color: var(--muted-clay-text);
 }
@@ -498,7 +502,7 @@ h1, h2, h3, h4, .brand-header {
 
 .audit-title {
   font-family: var(--font-outfit);
-  font-size: 16px;
+  font-size: 18px; /* Enlarged from 16px */
   font-weight: 700;
   color: var(--terracotta-red);
 }
@@ -529,7 +533,7 @@ h1, h2, h3, h4, .brand-header {
 }
 
 .audit-spot-title {
-  font-size: 13.5px;
+  font-size: 15px; /* Enlarged from 13.5px */
   font-weight: 700;
   color: var(--dark-clay-text);
   display: flex;
@@ -641,3 +645,948 @@ h1, h2, h3, h4, .brand-header {
   font-size: 13.5px;
   font-weight: 600;
 }
+
+/* 5. Aesthetic Right Inspiration and Details Console */
+.auromap-right-console {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 380px;
+  height: calc(100vh - 48px);
+  background: var(--ivory-white-panel);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(217, 155, 38, 0.2);
+  border-radius: 24px;
+  box-shadow: 0 16px 48px var(--terracotta-shadow), 0 4px 16px rgba(46, 43, 37, 0.05);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  animation: slide-in-right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(50px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.right-console-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(217, 155, 38, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.right-console-title {
+  font-family: var(--font-outfit);
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--terracotta-red);
+  letter-spacing: 0.02em;
+}
+
+.right-console-close {
+  background: transparent;
+  border: none;
+  font-family: var(--font-outfit);
+  font-size: 12px;
+  color: var(--muted-clay-text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.right-console-close:hover {
+  color: var(--terracotta-red);
+}
+
+.right-console-workspace {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Web Scroller for right console */
+.right-console-workspace::-webkit-scrollbar {
+  width: 6px;
+}
+.right-console-workspace::-webkit-scrollbar-track {
+  background: transparent;
+}
+.right-console-workspace::-webkit-scrollbar-thumb {
+  background: var(--warm-sand-gray);
+  border-radius: 3px;
+}
+
+/* Google Places Detail Card inside Right Console */
+.google-details-card {
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(109, 102, 90, 0.12);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(46, 43, 37, 0.03);
+  display: flex;
+  flex-direction: column;
+}
+
+.details-hero-img {
+  width: 100%;
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.details-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.details-title {
+  font-family: var(--font-outfit);
+  font-size: 17.5px;
+  font-weight: 700;
+  color: var(--dark-clay-text);
+  line-height: 1.35;
+}
+
+.details-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.details-rating .stars {
+  color: var(--amber-gold);
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.details-rating .rating-text {
+  font-size: 12px;
+  color: var(--muted-clay-text);
+  font-weight: 600;
+}
+
+.details-meta-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(230, 226, 218, 0.25);
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(109, 102, 90, 0.06);
+}
+
+.details-meta-item {
+  display: flex;
+  gap: 8px;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.details-meta-item .meta-label {
+  color: var(--muted-clay-text);
+  font-weight: 700;
+  width: 36px;
+  flex-shrink: 0;
+}
+
+.details-meta-item .meta-value {
+  color: var(--dark-clay-text);
+}
+
+.details-meta-item .meta-value.link {
+  color: var(--terracotta-red);
+  text-decoration: none;
+  font-weight: 600;
+  word-break: break-all;
+  transition: opacity 0.2s ease;
+}
+
+.details-meta-item .meta-value.link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.add-to-candidate-btn {
+  background: linear-gradient(180deg, #FAF9F5 0%, #E6E2DA 100%);
+  border: 1px solid rgba(109, 102, 90, 0.25);
+  border-radius: 12px;
+  padding: 10px;
+  font-family: var(--font-outfit);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--terracotta-red);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.add-to-candidate-btn:hover {
+  background: var(--terracotta-red);
+  color: #ffffff;
+  border-color: var(--terracotta-red);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--terracotta-shadow);
+}
+
+.add-to-candidate-btn:active {
+  transform: translateY(0);
+}
+
+/* Candidate places folder stack */
+.candidate-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px dashed rgba(109, 102, 90, 0.2);
+  padding-top: 20px;
+  margin-top: 4px;
+}
+
+.candidate-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-outfit);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--muted-clay-text);
+  letter-spacing: 0.02em;
+}
+
+.clear-candidates-link {
+  background: none;
+  border: none;
+  color: var(--terracotta-red);
+  font-family: var(--font-outfit);
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.clear-candidates-link:hover {
+  opacity: 1;
+}
+
+.candidate-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.candidate-item-card {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(109, 102, 90, 0.1);
+  border-radius: 12px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.candidate-item-card:hover {
+  background: #ffffff;
+  border-color: rgba(217, 155, 38, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(46, 43, 37, 0.02);
+}
+
+.candidate-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.candidate-item-title {
+  font-family: var(--font-outfit);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--dark-clay-text);
+}
+
+.remove-candidate-btn {
+  background: none;
+  border: none;
+  color: #a39c90;
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.remove-candidate-btn:hover {
+  color: var(--terracotta-red);
+}
+
+.candidate-item-address {
+  font-size: 11px;
+  color: var(--muted-clay-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Prompt generator call to action */
+.generate-prompt-btn {
+  background: linear-gradient(135deg, var(--terracotta-red) 0%, var(--amber-gold) 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  padding: 12px;
+  font-family: var(--font-outfit);
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(192, 92, 70, 0.25);
+  margin-top: 8px;
+}
+
+.generate-prompt-btn:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 18px rgba(192, 92, 70, 0.45);
+}
+
+.generate-prompt-btn:active {
+  transform: translateY(0);
+}
+
+/* 6. High-End Prompt Copy Modal */
+.prompt-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(46, 43, 37, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.25s ease forwards;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.prompt-modal-card {
+  background: #fdfcf9;
+  border: 1px solid rgba(217, 155, 38, 0.25);
+  border-radius: 24px;
+  width: 580px;
+  max-width: 90vw;
+  padding: 24px;
+  box-shadow: 0 24px 64px rgba(46, 43, 37, 0.15);
+  animation: scale-up 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes scale-up {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.prompt-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(109, 102, 90, 0.1);
+  padding-bottom: 12px;
+}
+
+.prompt-modal-header span {
+  font-family: var(--font-outfit);
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--terracotta-red);
+}
+
+.prompt-modal-header .close-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #a39c90;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.prompt-modal-header .close-btn:hover {
+  color: var(--terracotta-red);
+}
+
+.prompt-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.prompt-modal-notice {
+  font-size: 12.5px;
+  color: var(--muted-clay-text);
+  line-height: 1.45;
+}
+
+.prompt-modal-textarea {
+  width: 100%;
+  height: 200px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(109, 102, 90, 0.18);
+  background: rgba(230, 226, 218, 0.25);
+  font-family: var(--font-inter);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--dark-clay-text);
+  resize: none;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.prompt-modal-textarea:focus {
+  border-color: rgba(192, 92, 70, 0.4);
+}
+
+.modal-confirm-btn {
+  background: var(--terracotta-red);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 18px;
+  font-family: var(--font-outfit);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(192, 92, 70, 0.2);
+}
+
+.modal-confirm-btn:hover {
+  background: #a94a34;
+  box-shadow: 0 4px 12px rgba(192, 92, 70, 0.35);
+}
+
+/* Places Editorial Summary overview */
+.details-summary-text {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--muted-clay-text);
+  background: rgba(217, 155, 38, 0.05);
+  padding: 8px 12px;
+  border-left: 2px solid var(--amber-gold);
+  border-radius: 4px 10px 10px 4px;
+  margin: 4px 0;
+}
+
+/* User Reviews Section styling */
+.details-reviews-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px dashed rgba(109, 102, 90, 0.15);
+  padding-top: 12px;
+  margin-top: 8px;
+}
+
+.reviews-section-title {
+  font-family: var(--font-outfit);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted-clay-text);
+  margin-bottom: 2px;
+}
+
+.details-reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.review-item {
+  background: rgba(230, 226, 218, 0.15);
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(109, 102, 90, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.review-item-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.review-author {
+  font-family: var(--font-outfit);
+  font-weight: 700;
+  font-size: 11.5px;
+  color: var(--dark-clay-text);
+}
+
+.review-rating {
+  color: var(--amber-gold);
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+
+.review-time {
+  font-size: 10px;
+  color: #a39c90;
+  margin-left: auto;
+}
+
+.review-text {
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--muted-clay-text);
+  margin: 0;
+  word-break: break-word;
+}
+
+/* 7. Luxury Ticket Capsule & Safety Alert Bubble Styling */
+.ticket-capsule {
+  margin-top: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(217, 155, 38, 0.15);
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(46, 43, 37, 0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+.ticket-capsule::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 16px 16px 0;
+  border-color: transparent transparent var(--warm-sand-gray) transparent;
+  box-shadow: -2px 2px 4px rgba(46, 43, 37, 0.05);
+  border-bottom-left-radius: 4px;
+}
+
+.ticket-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ticket-badge {
+  background: rgba(192, 92, 70, 0.08);
+  color: var(--terracotta-red);
+  font-family: var(--font-outfit);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+}
+
+.ticket-time-badge {
+  background: rgba(217, 155, 38, 0.08);
+  color: #9c6c0c;
+  font-family: var(--font-outfit);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.ticket-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  background: rgba(230, 226, 218, 0.15);
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+.ticket-grid-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ticket-grid-item .label {
+  font-size: 9.5px;
+  color: var(--muted-clay-text);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.ticket-grid-item .value {
+  font-size: 11.5px;
+  color: var(--dark-clay-text);
+  font-weight: 600;
+}
+
+.ticket-action-btn {
+  background: linear-gradient(180deg, #ffffff 0%, #faf9f5 100%);
+  border: 1px solid rgba(192, 92, 70, 0.25);
+  border-radius: 10px;
+  padding: 6px;
+  font-family: var(--font-outfit);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--terracotta-red);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ticket-action-btn:hover {
+  background: var(--terracotta-red);
+  color: #ffffff;
+  border-color: var(--terracotta-red);
+  box-shadow: 0 4px 10px var(--terracotta-shadow);
+}
+
+.transit-alert-bubble {
+  margin: 0 0 0 12px;
+  background: rgba(192, 92, 70, 0.06);
+  border: 1px solid rgba(192, 92, 70, 0.12);
+  border-radius: 10px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: calc(100% - 24px);
+  animation: fade-in-up 0.3s ease;
+  box-sizing: border-box;
+}
+
+.transit-alert-bubble .alert-icon {
+  font-size: 11px;
+  margin-top: 1px;
+}
+
+.transit-alert-bubble .alert-text {
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: var(--muted-clay-text);
+  font-weight: 500;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 8. Luxury Export Buttons & PRINT ONLY Layout Styling */
+.export-buttons-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  padding: 2px 2px 6px 2px;
+}
+
+.export-buttons-row::-webkit-scrollbar {
+  height: 4px;
+}
+.export-buttons-row::-webkit-scrollbar-track {
+  background: transparent;
+}
+.export-buttons-row::-webkit-scrollbar-thumb {
+  background: var(--warm-sand-gray);
+  border-radius: 2px;
+}
+
+.export-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: linear-gradient(180deg, #ffffff 0%, #faf9f5 100%);
+  border: 1px solid rgba(217, 155, 38, 0.25);
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-family: var(--font-outfit);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--dark-clay-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.export-btn:hover {
+  background: var(--terracotta-red);
+  color: #ffffff;
+  border-color: var(--terracotta-red);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px var(--terracotta-shadow);
+}
+
+.export-btn:active {
+  transform: translateY(0);
+}
+
+/* Hidden Print Container in Screen View */
+.auromap-print-container {
+  display: none !important;
+}
+
+/* Print Only Styling */
+@media print {
+  body, html {
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+    font-family: 'Inter', system-ui, sans-serif !important;
+  }
+
+  /* Hide entire screen UI except the parent viewport */
+  .auromap-console, 
+  .auromap-right-console, 
+  .audit-overlay,
+  .prompt-modal-backdrop,
+  .toast-error,
+  .scraped-textarea,
+  .satin-button,
+  .triple-trigger-buttons,
+  .brand,
+  .asset-menu-container,
+  .google-details-card,
+  #mapRef,
+  .auromap-map-container {
+    display: none !important;
+  }
+
+  /* Show and format print container */
+  .auromap-print-container {
+    display: block !important;
+    padding: 30px !important;
+    background: #ffffff !important;
+  }
+
+  .print-header {
+    text-align: center;
+    border-bottom: 2px double #1a1a1a;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+  }
+
+  .print-header h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: #c05c46;
+    margin: 0 0 8px 0;
+  }
+
+  .print-header p {
+    font-size: 13px;
+    color: #666;
+    margin: 0;
+    font-style: italic;
+  }
+
+  .print-days-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .print-day-section {
+    page-break-inside: avoid;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 30px;
+  }
+
+  .print-day-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #222;
+    border-left: 4px solid #c05c46;
+    padding-left: 10px;
+    margin: 0 0 20px 0;
+  }
+
+  .print-events-stream {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .print-event-card {
+    page-break-inside: avoid;
+    background: #fcfcfc;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  .print-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .print-event-time {
+    background: #e6e2da;
+    color: #2e2b25;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+
+  .print-event-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #111;
+    margin: 0;
+  }
+
+  .print-event-desc {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: #444;
+    margin: 0 0 8px 0;
+  }
+
+  .print-ticket-badge {
+    background: rgba(192, 92, 70, 0.05);
+    border: 1px dashed rgba(192, 92, 70, 0.3);
+    color: #c05c46;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+
+  /* 景点地址排版 */
+  .print-event-address {
+    font-size: 11px;
+    color: #777777;
+    font-style: italic;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* 谷歌静态路线截图样式 */
+  .print-route-map-container {
+    page-break-inside: avoid;
+    width: 100%;
+    margin-bottom: 25px;
+    border: 1px solid #e0dcce;
+    border-radius: 12px;
+    padding: 8px;
+    background: #fbfbf9;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .print-route-map {
+    width: 100%;
+    height: auto;
+    max-height: 320px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .print-map-caption {
+    font-size: 11px;
+    color: #837c70;
+    margin: 8px 0 0 0;
+    font-weight: 600;
+  }
+
+  /* 跨景点优雅纸质交通线 */
+  .print-transit-bridge {
+    page-break-inside: avoid;
+    margin: -10px 0 -10px 30px;
+    border-left: 2px dashed #d4cebf;
+    padding: 15px 0 15px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .print-transit-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #524f48;
+    background: #ebe8e1;
+    padding: 4px 10px;
+    border-radius: 6px;
+    width: fit-content;
+  }
+
+  .print-transit-badge span {
+    color: #a39c90;
+  }
+
+  .print-transit-badge span:first-child {
+    color: #524f48;
+  }
+
+  .print-transit-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    background: rgba(192, 92, 70, 0.04);
+    border: 1px dashed rgba(192, 92, 70, 0.25);
+    color: #c05c46;
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+    max-width: 80%;
+  }
+
+  .print-transit-alert .alert-icon {
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+
+  .print-transit-alert .alert-text {
+    line-height: 1.4;
+  }
+}
+
+
+

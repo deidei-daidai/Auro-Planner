@@ -55,10 +55,18 @@ export async function POST(req, { params }) {
             title: ev.title,
             englishTitle: ev.englishTitle || null,
             description: ev.description,
+            address: ev.address || null,
             transitMode: ev.transitMode || "DRIVING",
+            transitDuration: ev.transitDuration || null, // Save calculated transit duration!
             latitude: parseFloat(ev.latitude) || 0,
             longitude: parseFloat(ev.longitude) || 0,
-            isHotel: ev.isHotel || false
+            isHotel: ev.isHotel || false,
+            bookingRequired: ev.bookingRequired || false,
+            bookingSession: ev.bookingSession || null,
+            ticketPrice: ev.ticketPrice || null,
+            advanceBookingTime: ev.advanceBookingTime || null,
+            bookingUrl: ev.bookingUrl || null,
+            transitNotes: ev.transitNotes || null
           }
         });
         inserted.push(newEvent);

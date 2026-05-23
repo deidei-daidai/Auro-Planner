@@ -1,5 +1,11 @@
 # 🧭 AuroMap Planner (旅行规划足迹地图系统) - 安装与配置指南
 
+> [!IMPORTANT]
+> ### 🔑 本地备忘：您的真实 API 密钥 (仅保存在本地，切勿 commit/push 到 GitHub！)
+> 为了方便您在下一台电脑快速复制配置，以下是您当前使用的真实 API Key。复制后放入 `.env.local` 即可：
+> - **DeepSeek API Key**: `sk-fab038edf47e4c288a7acd34d86c6a49`
+> - **Google Maps API Key**: `AIzaSyDlK1jZIW_ghgw2Db-Htmu53kH0Js20oOc`
+
 AuroMap Planner 是一款高阶旅行规划与足迹可视化系统。系统由两个核心部分组成：
 1. **Chrome 浏览器插件 (插件/)**：用于从旅行网站、AI 聊天对话框中一键刮取结构化或段落式的旅行路线规划。
 2. **网页端后台应用 (网页端/)**：基于 Next.js App Router、Tailwind CSS/Vanilla CSS 与 SQLite (Prisma) 打造的豪华中枢系统。支持旅行轨迹的 Macro（宏观路线）、Daily（每日行程）、Micro（3D 景内微观步行）三维深度渲染，并自动匹配双语地名定位与三种出行交通模式。

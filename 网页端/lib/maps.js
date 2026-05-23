@@ -15,9 +15,11 @@ export async function geocodeAddress(address) {
     
     if (data.status === "OK" && data.results && data.results.length > 0) {
       const location = data.results[0].geometry.location;
+      const formattedAddress = data.results[0].formatted_address;
       return {
         lat: location.lat,
-        lng: location.lng
+        lng: location.lng,
+        address: formattedAddress || null
       };
     }
     

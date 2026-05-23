@@ -26,10 +26,18 @@ model DailyEvent {
   title       String       // 目的地/活动名称
   englishTitle String?     // 目的地/活动官方英文/本地名称
   description String?      // 活动描述
-  transitMode String       @default("DRIVING") // 至下一地点的交通方式 (DRIVING, WALKING, TRANSIT)
+  transitMode String       @default("DRIVING") // 至下一地点的交通方式 (DRIVING, WALKING, TRANSIT, FLIGHT, TRAIN)
+  transitDuration String?    // 至下一地点的交通时间/耗时 (例如 "15分钟", "2小时")
   latitude    Float        // 纬度 (高精对齐坐标)
   longitude   Float        // 经度 (高精对齐坐标)
   isHotel     Boolean      @default(false)     // 是否是当天的住宿酒店
+  bookingRequired      Boolean      @default(false)     // 是否需要订票
+  bookingSession       String?                          // 预订场次
+  ticketPrice          String?                          // 门票价格
+  advanceBookingTime   String?                          // 提前预订时间
+  bookingUrl           String?                          // 购票地址/链接
+  transitNotes         String?                          // 交通注意事项（至下一个景点的备注）
+  address              String?                          // 景点的详细地址
   
   trip        Trip         @relation(fields: [tripId], references: [id], onDelete: Cascade)
   intraPoints IntraPoint[] // 1对多级联最细层：景内微观坐标点位

@@ -10,6 +10,7 @@ export const useTripStore = create((set, get) => ({
   macroSandbox: null,        // { name, totalDays, summary, cities: [...] }
   sandboxBuffer: null,       // { dayIndex, events: [...] }
   sandboxIntraBuffer: null,  // { eventId, parentEventTitle, intraPoints: [...] }
+  candidatePlaces: [],       // ⭐ Added: candidate places array for inspirations
   
   isLoading: false,
   errorMessage: null,
@@ -18,6 +19,18 @@ export const useTripStore = create((set, get) => ({
   setChannelActive: (active) => set({ isChannelActive: active }),
   setErrorMessage: (msg) => set({ errorMessage: msg }),
   setActiveDayIndex: (dayIndex) => set({ activeDayIndex: dayIndex }),
+
+  // Candidate places actions
+  addCandidatePlace: (place) => set((state) => ({
+    candidatePlaces: [
+      ...state.candidatePlaces.filter(p => p.placeId !== place.placeId),
+      place
+    ]
+  })),
+  removeCandidatePlace: (placeId) => set((state) => ({
+    candidatePlaces: state.candidatePlaces.filter(p => p.placeId !== placeId)
+  })),
+  clearCandidatePlaces: () => set({ candidatePlaces: [] }),
 
   // 1. Fetch all trips from db
   fetchTrips: async () => {
@@ -202,8 +215,8 @@ export const useTripStore = create((set, get) => ({
     }
   },
 
-  // 10. Commit Single Day Events to SQLite with outer validations
-  commitDailyPlan: async () => {
+  // 10. Commit Single Day Events to SQLite with outer validations (supports saving transitDurations)
+  commitDailyPlan: async (customEvents = null) => {
     const { sandboxBuffer, activeTripId } = get();
     if (!sandboxBuffer || !activeTripId) return;
 
@@ -214,7 +227,7 @@ export const useTripStore = create((set, get) => ({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           dayIndex: sandboxBuffer.dayIndex,
-          events: sandboxBuffer.events
+          events: customEvents || sandboxBuffer.events
         })
       });
 
